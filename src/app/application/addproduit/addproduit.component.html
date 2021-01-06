@@ -1,26 +1,26 @@
 
     <h3>Ajout d'un produit</h3>
-    <form >
-        <div>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="form-group">
             <label> Identifiant du produit </label>
-            <input type="number" name="id" > 
+            <input type="number" name="id" class="form-control" required [(ngModel)]="produit.id" > 
         </div>  
-        <div>
+        <div class="form-group">
             <label>Libellé</label>
-            <input type="text" name="lib" >
+            <input type="text" name="lib" class="form-control" required [(ngModel)]="produit.libelle" >
         </div>
         <div>
             <label> Made In </label>
             <label>
-                <input type="radio" name="madeIn" value="Tunisie" >Tunisie
+                <input type="radio" name="madeIn" value="Tunisie" [(ngModel)]="produit.madeIn" >Tunisie
             </label>
             <label>
-                <input type="radio" name="madeIn" value="Autre" >Autre
+                <input type="radio" name="madeIn" value="Autre" [(ngModel)]="produit.madeIn" >Autre
             </label>
         </div>
-        <div>
+        <div class="form-group">
             <label>Catégorie</label>
-            <select name="categ" >
+            <select name="categ" class="form-control" [(ngModel)]="produit.categorie" >
                 <option value="Fourniture">Fourniture</option>
                 <option value="Vêtements">Vêtements</option>
                 <option value="Accessoires">Accessoires</option>
@@ -28,14 +28,17 @@
         </div>
         <div>
             <label>
-                 <input type="checkbox" name="nouv" > Nouveau
+                 <input type="checkbox" name="nouv" [(ngModel)]="produit.nouveau" > Nouveau
             </label>
         </div>
 
-        <input type="submit" value = "Ajouter" >
-    
-        <input type ="button" value="Vider" >
+        <input type="submit" class="btn btn-danger" value = "Ajouter" [disabled]="f.invalid">
+   
+        <input type ="button" class="btn btn-success"value="Vider" (click)="onVider(f)" >
     </form>
+    <div [hidden]="!submitted">
+        {{message}}
+    </div>
 <!--
     <h3>Ajout d'un produit</h3>
     <form >

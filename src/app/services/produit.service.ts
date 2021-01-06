@@ -15,4 +15,17 @@ export class ProduitService {
     return this.lesProduits;
   }
 
+
+  getProduitById(id:number):Produit{
+    return <Produit>this.lesProduits.find(p=>p.id ==id);
+  }
+
+  addProduit(pdt:Produit):boolean{
+    if(this.getProduitById(pdt.id)==undefined){ 
+          this.lesProduits.push(pdt);
+          return true;
+  }
+      return false;  
+  }
+
 }
